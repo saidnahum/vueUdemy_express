@@ -1,23 +1,28 @@
-// Importando express js
-const express = require('express');
-const app = express();
-const morgan = require('morgan');
-const cors = require('cors')
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import path from 'path';
 
+const app = express();
+
+// Middleware
 app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(path.join(__dirname, 'public')));
 
-// Configurando ruta raíz del servidor
-app.get('/', function(req, res){
-   res.send('Hola desde Home');
-})
+// Rutas
+// app.get('/', (req, res) => {
+//    res.send('Hello World!');
+// });
 
-// Escuchar en un puerto
-// Estableciendo el puerto de manera global
-app.set('port', process.env.PORT || 3001);
+// Middleware para Vue.js router modo history
+const history = require('connect-history-api-fallback');
+app.use(history());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(app.get('port'), function(){
-   console.log('Escuchando en el puerto: ', app.get('port'));
-})
+app.set('puerto', process.env.PORT || 3000);
+app.listen(app.get('puerto'), () => {
+   console.log('Example app listening on port'+ app.get('puerto'));
+});
