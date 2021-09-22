@@ -42,14 +42,17 @@ app.use(express.urlencoded({ extended: true }));
 //    res.send('Hello World!');
 // });
 
+// Rutas
 app.use('/api', require('./routes/nota'));
+app.use('/api', require('./routes/user'));
+app.use('/api/login', require('./routes/login'));
 
 // Middleware para Vue.js router modo history
 const history = require('connect-history-api-fallback');
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('puerto', process.env.PORT || 3000);
+app.set('puerto', process.env.PORT || 3001);
 app.listen(app.get('puerto'), () => {
    console.log('Example app listening on port'+ app.get('puerto'));
 });
