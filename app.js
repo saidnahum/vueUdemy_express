@@ -3,6 +3,11 @@ import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
 
+// const express = require('express');
+// const morgan = require('morgan');
+// const cors = require('cors');
+// const path = require('path');
+
 const app = express();
 
 // Conexión a la DB
@@ -52,7 +57,7 @@ const history = require('connect-history-api-fallback');
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('puerto', process.env.PORT || 3001);
+app.set('puerto', process.env.PORT || 3007);
 app.listen(app.get('puerto'), () => {
    console.log('Example app listening on port'+ app.get('puerto'));
 });
